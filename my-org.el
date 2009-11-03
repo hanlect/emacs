@@ -8,3 +8,14 @@
 
 
 
+(org-remember-insinuate)
+(setq org-directory "~/ORG")
+(setq org-default-notes-file (concat org-directory "/todo.org"))
+(define-key global-map "\C-cr" 'org-remember)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+
+(setq org-remember-templates
+   '(("Todo" ?t "* TODO %?\n  %i\n  %a" "~/ORG/todo.org" "Tasks")
+     ("Note" ?i "* %^{Title}\n  %i\n" "~/ORG/notes.org" "Notes")
+     ("Weblink" ?w "* %c\n  - Date: %U\n  - Link: %:link\n  - Quote:\n\n    %?%:region\n\n" "~/ORG/bookmarks.org" "WebLinks" )))
