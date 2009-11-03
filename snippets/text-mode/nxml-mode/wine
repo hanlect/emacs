@@ -1,0 +1,12 @@
+<wine name="$1">
+  <properties>
+    <color> $2 </color>
+    <alcoholic-strength> $3 </alcoholic-strength>
+    <bouquet> $4 </bouquet>
+    <flavour> $5 </flavour>
+  </properties>
+  <origin>
+    <region>Toscana</region>
+  </origin>
+  $0
+</wine>
