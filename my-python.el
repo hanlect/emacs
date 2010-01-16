@@ -3,22 +3,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+
+;; Python mode
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode)
                                        interpreter-mode-alist))
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 
+(set-variable 'py-indent-offset 4)
+(set-variable 'py-smart-indentation nil)
+(set-variable 'indent-tabs-mode nil)
 
 
+
+;; IPython
 (setq ipython-command "/usr/bin/ipython")
 (setq py-python-command-args '("-pylab" "-colors" "Linux"))
 (require 'ipython)
-
-
-
 (setq ipython-completion-command-string "print(';'.join(__IP.Completer.all_completions('%s')))\n")
-
-
 
 (require 'comint)
 (define-key comint-mode-map [(meta p)]
@@ -32,6 +34,8 @@
 
 
 
+
+;; Flymake and Pylint
 (when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -45,25 +49,15 @@
                '("\\.py\\'" flymake-pylint-init)))
 
 
+ ;;pdb setup, note the python version
+ (setq pdb-path '/usr/lib/python2.6/pdb.py
+       gud-pdb-command-name (symbol-name pdb-path))
+ (defadvice pdb (before gud-query-cmdline activate)
+   "Provide a better default command line when called interactively."
+   (interactive
+    (list (gud-query-cmdline pdb-path
+	 		    (file-name-nondirectory buffer-file-name)))))
 
-;; (load-library "python")
-;;(add-hook 'python-mode-hook '(lambda () (define-key python-mode-map "\C-m" 'newline-and-indent)))
-;; (setq eldoc-idle-delay 0)
-;; (autoload 'turn-on-eldoc-mode "eldoc" nil t)
-
-;; (add-hook 'python-mode-hook
-
-
-;;           '(lambda () (eldoc-mode 1)) t)
-
-
-;; (defun my-insert-debug ()
-;;   "Insert debugging statement on the current line"
-;;   (interactive)
-;;   (save-excursion
-;;   (insert "pdb.set_trace()")
-;;   (newline-and-indent)))
-;; (define-key	python-mode-map	(kbd "C-;")	'my-insert-debug)
 
 
 

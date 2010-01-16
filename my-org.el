@@ -18,4 +18,4 @@
 (setq org-remember-templates
    '(("Todo" ?t "* TODO %?\n  %i\n  %a" "~/ORG/todo.org" "Tasks")
      ("Note" ?i "* %^{Title}\n  %i\n" "~/ORG/notes.org" "Notes")
-     ("Weblink" ?w "* %c\n  - Date: %U\n  - Link: %:link\n  - Quote:\n\n    %?%:region\n\n" "~/ORG/bookmarks.org" "WebLinks" )))
+     ("Bookmark" ?w "* %c\n  - Date: %U\n  - Link: %:link\n  - Snip:\n\n    %?%:region\n\n" "~/ORG/bookmarks.org" "Bookmarks" )))
